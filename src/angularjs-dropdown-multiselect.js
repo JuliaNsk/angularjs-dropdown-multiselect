@@ -86,7 +86,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 						}
 					}
 				}
-				if ($scope.settings.searchFieldFocus) {
+				if ($scope.settings.searchFieldFocus && $scope.settings.enableSearch) {
 					if ($scope.open) {
 						setTimeout(function () {
 							angular.element($element)[0].querySelector('.searchField').focus();
