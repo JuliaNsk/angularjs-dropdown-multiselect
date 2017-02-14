@@ -86,6 +86,13 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 						}
 					}
 				}
+				if ($scope.settings.searchFieldFocus) {
+					if ($scope.open) {
+						setTimeout(function () {
+							angular.element($element)[0].querySelector('.searchField').focus();
+						}, 0);
+					}
+				}
 			};
 
 			$scope.checkboxClick = function($event, id) {
@@ -126,6 +133,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				smartButtonTextConverter: angular.noop,
 				styleActive: false,
 				keyboardControls: false,
+				searchFieldFocus: false,
 				template: '{{getPropertyForObject(option, settings.displayProp)}}',
 				searchField: '$',
 				showAllSelectedText: false
