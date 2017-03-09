@@ -86,6 +86,13 @@
 							}
 						}
 					}
+					if ($scope.settings.enableSearch) {
+						if ($scope.open) {
+							setTimeout(function () {
+								angular.element($element)[0].querySelector('.searchField').focus();
+							}, 0);
+						}
+					}
 				};
 
 				$scope.checkboxClick = function($event, id) {
@@ -113,6 +120,7 @@
 					idProp: 'id',
 					externalIdProp: 'id',
 					enableSearch: false,
+					emptySearch: false,
 					selectionLimit: 0,
 					showCheckAll: true,
 					showUncheckAll: true,
@@ -167,6 +175,7 @@
 
 				$scope.close = function() {
 					$scope.open = false;
+					$scope.input.searchFilter = $scope.settings.emptySearch ? '' : $scope.input.searchFilter;
 					$scope.externalEvents.onClose();
 				}
 
@@ -262,7 +271,6 @@
 							var paddingWidth = 12 * 2,
 								borderWidth = 1 * 2,
 								dropdownIconWidth = 8;
-							var ellipsisWidth = textWidth("...");
 							var widthLimit = $element[0].offsetWidth - paddingWidth - borderWidth - dropdownIconWidth;
 
 							var itemsText = [];
@@ -283,9 +291,12 @@
 
 							var result = itemsText.join(', ');
 							var index = result.length - 4;
-							var countLimit = 100;
+
+							if ($element[0].offsetWidth === 0)
+								return result;
+
 							while (textWidth(result) > widthLimit) {
-								if (itemsText[itemsText.length - 1] !== "...") {
+								if (itemsText[itemsText.length - 1] !== '...') {
 									itemsText.push('...');
 									result = result + "...";
 								}
