@@ -173,7 +173,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					$scope.singleSelection = false;
 				}
 				if ($scope.extraSettings.selectedToTop) {
- 					var selected = $scope.selectedModel.map(function(model) {
+					var data = [$scope.selectedModel];
+ 					var selected = data.map(function(model) {
             return model.id;
           });
       		$scope.options = selectToTop($scope.options, selected, $scope.settings.displayProp);
@@ -416,7 +417,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					$scope.externalEvents.onSelectionChanged();
 				}
 				if ($scope.extraSettings.selectedToTop) {
- 					var selected = $scope.selectedModel.map(function(model) {
+					var data = [$scope.selectedModel];
+ 					var selected = data.map(function(model) {
             return model.id;
           });
       		$scope.options = selectToTop($scope.options, selected, $scope.settings.displayProp);
